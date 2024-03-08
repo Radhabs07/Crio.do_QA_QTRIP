@@ -11,17 +11,17 @@ import qtriptest.pages.RegisterPage;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.openqa.selenium.remote.BrowserType;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class testCase_03 {
     public static String lastGeneratedUserName;
-    static RemoteWebDriver driver;
+    static WebDriver driver;
 
     public static void logStatus(String type, String message, String status) {
 
@@ -30,7 +30,7 @@ public class testCase_03 {
     }
 
     // Initialize webdriver for our unit tests
-    @BeforeTest
+    @BeforeSuite(alwaysRun = true)
     public static void createDriver() throws MalformedURLException, InterruptedException {
         logStatus("driver", "Initializing driver", "Started");
         // Launch Browser using Zalenium
@@ -40,6 +40,7 @@ public class testCase_03 {
         System.out.println("Hashcode of driver is" + driver.hashCode());
 
         driver.get("https://qtripdynamic-qa-frontend.vercel.app/");
+        // driver.manage().window().maximize();
         Thread.sleep(3000);
 
         logStatus("driver", "Initializing driver", "Success");     
@@ -55,7 +56,7 @@ public class testCase_03 {
             logStatus("Page Test", "navigation to Register Page", "Success");
             RegisterPage register = new RegisterPage(driver);
 
-            status = register.registerNewUser("testuser@gmail.com", "Saj@123", "Saj@123", true);
+            status = register.registerNewUser("testuser@gmail.com", "Rad@123", "Rad@123", true);
             if(status){
                 logStatus("Page Test", "User Registeration Successfully", "Success");
             }
@@ -65,7 +66,7 @@ public class testCase_03 {
             lastGeneratedUserName = register.USER_EMAIL;
             LoginPage login = new LoginPage(driver);
 
-            login.logInUser(lastGeneratedUserName, "Saj@123");
+            login.logInUser(lastGeneratedUserName, "Rad@123");
 
             Thread.sleep(2000);
 
@@ -99,7 +100,7 @@ public class testCase_03 {
         }            
         }
 
-        @AfterTest(enabled = false)
+        @AfterSuite(enabled = false)
         public static void quitDriver() throws MalformedURLException {
         driver.close();
         driver.quit();

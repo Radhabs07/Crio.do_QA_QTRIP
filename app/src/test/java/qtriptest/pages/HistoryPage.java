@@ -1,24 +1,21 @@
 package qtriptest.pages;
-
+import java.time.Duration;
 import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.TimeoutException;
 import org.testng.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
+
 public class HistoryPage {
-    RemoteWebDriver driver;
+    WebDriver driver;
     
-    public HistoryPage(RemoteWebDriver driver){
+    public HistoryPage(WebDriver driver){
         this.driver = driver;
         AjaxElementLocatorFactory factory = new AjaxElementLocatorFactory(driver, 20);
         PageFactory.initElements(factory, this);
@@ -50,7 +47,7 @@ public class HistoryPage {
 
         String message = "";
 
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver,Duration .ofSeconds(30));
 
         try {
             WebElement refresh_transaction_id =
@@ -67,11 +64,11 @@ public class HistoryPage {
         Assert.assertEquals(finalmessage, "Transaction ID is not present","Success: Transaction ID removed after page refresh ");
     }
 
-    public void bookingHistoryCheck() throws InterruptedException{
+       public void bookingHistoryCheck() throws InterruptedException{
 
        List <WebElement> reservationTableCheck = driver.findElements(By.xpath("//th[@scope='row']"));
 
-      int reservationsTableCheck = reservationTableCheck.size();
+       int reservationsTableCheck = reservationTableCheck.size();
 
        Assert.assertTrue(reservationsTableCheck == 3, "Verified Reservation Table");
 }

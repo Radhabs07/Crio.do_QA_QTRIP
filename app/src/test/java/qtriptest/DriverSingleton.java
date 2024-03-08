@@ -1,28 +1,30 @@
 package qtriptest;
 
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.charset.MalformedInputException;
-import org.openqa.selenium.remote.BrowserType;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+
 
 public class DriverSingleton {
 
 
-    RemoteWebDriver driver;
+    WebDriver driver;
 
     private static DriverSingleton instanceOfSingleton;
 
     private DriverSingleton() throws MalformedURLException{
 
-        final DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setBrowserName(BrowserType.CHROME);
-        driver = new RemoteWebDriver(new URL("http://localhost:8082/wd/hub"), capabilities);
+       ChromeOptions options = new ChromeOptions();
+       
+       driver = new ChromeDriver(options);
+		WebDriverManager.chromedriver().setup();
+
+         driver.manage().window().maximize();
 
         System.out.println("Create Driver");
-
-        driver.manage().window().maximize();
     }
 
     public static DriverSingleton getInstanceOfSingletonBrowserClass() throws MalformedURLException{
@@ -38,7 +40,7 @@ public class DriverSingleton {
         
     }
 
-    public RemoteWebDriver getDriver(){
+    public WebDriver getDriver(){
 
         return driver;
     }

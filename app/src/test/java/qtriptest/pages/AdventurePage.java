@@ -1,16 +1,16 @@
 package qtriptest.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.testng.Assert;
 
 public class AdventurePage {
 
-    RemoteWebDriver driver;
-    public AdventurePage(RemoteWebDriver driver){
+    WebDriver driver;
+    public AdventurePage(WebDriver driver){
         this.driver = driver;
         AjaxElementLocatorFactory factory = new AjaxElementLocatorFactory(driver, 20);
         PageFactory.initElements(factory, this);

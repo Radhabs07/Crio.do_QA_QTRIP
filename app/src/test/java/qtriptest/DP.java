@@ -21,7 +21,7 @@ public class DP {
     public Object[][] dpMethod(Method m) throws IOException {
         String testSheetName = m.getName(); //returns the name of the sheet
         Object[][] testData =  null;
-        String filepath = "/home/crio-user/workspace/bs-radha07-ME_QTRIP_QA_V2/app/src/test/resources/DatasetsforQTrip.xlsx";
+        String filepath = "C:\\CRIO\\CRIO\\CRIO-QA-GitLab projects\\bs-radha07-ME_QTRIP_QA_V2-master\\app\\src\\test\\resources\\DatasetsforQTrip.xlsx";
         int rowIndex = 0;
         int cellIndex = 0;
         List<List> outputList = new ArrayList<List>();

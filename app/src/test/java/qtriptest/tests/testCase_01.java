@@ -6,29 +6,16 @@ import qtriptest.pages.HomePage;
 import qtriptest.pages.LoginPage;
 import qtriptest.pages.RegisterPage;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.UUID;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.logging.Logs;
-import org.openqa.selenium.remote.BrowserType;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class testCase_01 {
 
     public static String lastGeneratedUserName;
-    static RemoteWebDriver driver;
+    static WebDriver driver;
 
     public static void logStatus(String type, String message, String status) {
 
@@ -45,10 +32,11 @@ public class testCase_01 {
         DriverSingleton singleton = DriverSingleton.getInstanceOfSingletonBrowserClass();
         driver = singleton.getDriver();
 
+
         System.out.println("Hashcode of driver is" + driver.hashCode());
         
         driver.get("https://qtripdynamic-qa-frontend.vercel.app/");
-        //driver.manage().window().maximize();
+        // driver.manage().window().maximize();
 
         logStatus("driver", "Initializing driver", "Success");   
     }

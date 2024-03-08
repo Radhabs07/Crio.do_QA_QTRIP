@@ -9,20 +9,17 @@ import qtriptest.pages.HomePage;
 import qtriptest.pages.LoginPage;
 import qtriptest.pages.RegisterPage;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import org.openqa.selenium.remote.BrowserType;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 public class testCase_04 {
     public static String lastGeneratedUserName;
-    static RemoteWebDriver driver;
+    static WebDriver driver;
 
     public static void logStatus(String type, String message, String status) {
 
@@ -31,7 +28,7 @@ public class testCase_04 {
     }
 
     // Initialize webdriver for our unit tests
-    @BeforeTest
+    @BeforeSuite(alwaysRun=true)
     public static void createDriver() throws MalformedURLException {
         logStatus("driver", "Initializing driver", "Started");
         // Launch Browser using Zalenium
@@ -41,7 +38,7 @@ public class testCase_04 {
         System.out.println("Hashcode of driver is" + driver.hashCode());
 
         driver.get("https://qtripdynamic-qa-frontend.vercel.app/");
-        driver.manage().window().maximize();
+        // driver.manage().window().maximize();
 
         logStatus("driver", "Initializing driver", "Success");   
     }
@@ -76,7 +73,7 @@ public class testCase_04 {
        lastGeneratedUserName = register.USER_EMAIL;
        LoginPage login = new LoginPage(driver);
 
-       login.logInUser(lastGeneratedUserName, "Saj@123");
+       login.logInUser(lastGeneratedUserName, "Rad@123");
 
        logStatus("Page Test", "User Logged In Successfully", "Success");
         HistoryPage history=new HistoryPage(driver);
@@ -96,7 +93,8 @@ public class testCase_04 {
         
         // Assert.assertTrue(history.getReservation(list[2]));
         // logStatus("page", "Get reservation", "success");
-        driver.get("https://qtripdynamic-qa-frontend.vercel.app/"); // to Start another Booking
+        driver.get("https://qtripdynamic-qa-frontend.vercel.app/"); 
+        // to Start another Booking
         }
 
         // navigate to history page
@@ -113,7 +111,7 @@ public class testCase_04 {
     }
 
 
-        @AfterTest(enabled = true)
+        @AfterSuite(enabled = true)
         public static void quitDriver() throws MalformedURLException {
         driver.close();
         driver.quit();

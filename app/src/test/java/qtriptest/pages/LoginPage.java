@@ -1,10 +1,7 @@
 package qtriptest.pages;
 
-import java.util.UUID;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
@@ -13,7 +10,7 @@ import org.testng.Assert;
 
 public class LoginPage {
 
-    RemoteWebDriver driver;
+    WebDriver driver;
 
     @FindBy(name = "email")
     private WebElement emailInput;
@@ -33,7 +30,7 @@ public class LoginPage {
     // @FindBy(xpath = "//div[@onclick='Logout()'']")
     // private WebElement logoutbtn;
 
-    public LoginPage(RemoteWebDriver driver){
+    public LoginPage(WebDriver driver){
         this.driver = driver;
         AjaxElementLocatorFactory factory = new AjaxElementLocatorFactory(driver, 30);
         PageFactory.initElements(factory, this);
