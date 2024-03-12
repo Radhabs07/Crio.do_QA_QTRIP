@@ -63,7 +63,7 @@ public class testCase_04 {
        logStatus("Page Test", "navigation to Register Page", "Success");
        RegisterPage register = new RegisterPage(driver);
 
-       status = register.registerNewUser("testuser@gmail.com", "Saj@123", "Saj@123", true);
+       status = register.registerNewUser(username,password,password, true);
        if(status){
            logStatus("Page Test", "User Registeration Successfully", "Success");
        }
@@ -73,7 +73,7 @@ public class testCase_04 {
        lastGeneratedUserName = register.USER_EMAIL;
        LoginPage login = new LoginPage(driver);
 
-       login.logInUser(lastGeneratedUserName, "Rad@123");
+       login.logInUser(lastGeneratedUserName,password);
 
        logStatus("Page Test", "User Logged In Successfully", "Success");
         HistoryPage history=new HistoryPage(driver);
@@ -86,16 +86,28 @@ public class testCase_04 {
         
     //    Assert.assertTrue(driver.findElement(By.xpath("//h1[@id='adventure-name']")).getText().equals(list[1]));
     //     logStatus("page", "Select given adventure", "success");
+
+        Thread.sleep(3000);
+
+        System.out.println(list[2]);
+        System.out.println(list[3]);
+        System.out.println(list[4]);
         AdventureDetailsPage advPage=new AdventureDetailsPage(driver);
         advPage.bookAdventure(list[2], list[3], list[4]);
+       
+        // System.out.println(list[2]);
+        // System.out.println(list[3]);
+        // System.out.println(list[4]);
+
         // Assert.assertTrue(advPage.isBookingSuccessful());
         logStatus("page", "Book adventure", "success");
         
         // Assert.assertTrue(history.getReservation(list[2]));
         // logStatus("page", "Get reservation", "success");
-        driver.get("https://qtripdynamic-qa-frontend.vercel.app/"); 
+        driver.get("https://qtripdynamic-qa-frontend.vercel.app/");
         // to Start another Booking
-        }
+
+                }
 
         // navigate to history page
         history.navigateToHistoryPage();
@@ -113,7 +125,7 @@ public class testCase_04 {
 
         @AfterSuite(enabled = true)
         public static void quitDriver() throws MalformedURLException {
-        driver.close();
+        // driver.close();
         driver.quit();
         logStatus("driver", "Quiting Driver", "Success");
     }
